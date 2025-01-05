@@ -1,7 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models
 from tensorflow.keras.datasets import mnist
-import numpy as np
 
 # Load the MNIST dataset
 (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
@@ -19,12 +18,18 @@ model = models.Sequential([
     layers.Conv2D(64, (3, 3), activation='relu'),
     layers.Flatten(),
     layers.Dense(64, activation='relu'),
-    layers.Dense(10, activation='softmax')
+    layers.Dense(10, activation='softmax')  # Output layer for 10 classes (digits 0-9)
 ])
 
-# Compile and train the model
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-model.fit(train_images, train_labels, epochs=5)
+# Compile the model
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
 
-# Save the model in .keras format
+# Train the model
+model.fit(train_images, train_labels, epochs=5, validation_data=(test_images, test_labels))
+
+# Save the trained model in .keras format
 model.save('mnist_model.keras')
+
+print("Model trained and saved as 'mnist_model.keras'")

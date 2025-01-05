@@ -52,5 +52,5 @@ if canvas_result.image_data is not None:
     predicted_digit = np.argmax(prediction)
 
     # Display the predicted digit
-    st.image(drawn_image, caption="Your Drawing", use_column_width=True)
+    # st.image(drawn_image, caption="Your Drawing", use_column_width=True)
     st.write(f"Prediction: {predicted_digit}")
